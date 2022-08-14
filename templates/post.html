@@ -1,0 +1,135 @@
+{% extends 'base.html'%} {% block head %}
+<title>Post Page</title>
+{% endblock %} {% block body %}
+<div class="page-container">
+    <div class="left-content">
+        <div class="list-group">
+            <a
+                href="#"
+                class="list-group-item list-group-item-action active"
+                aria-current="true"
+            >
+                {{post.title}}
+            </a>
+            {% for allpost in posts %} {% if allpost.id!= post.id%}
+            <a
+                href="/post/{{allpost.id}}"
+                class="list-group-item list-group-item-action"
+                >{{allpost.title}}</a
+            >
+            {% endif %} {% endfor %}
+        </div>
+    </div>
+    <div class="right-content">
+        <div class="first-container">
+            <div class="post-title-container">
+                <div class="post-title">{{ post.title }}</div>
+            </div>
+            <div class="author-container">
+                <div class="author-name">Created By : {{post.author}}</div>
+            </div>
+        </div>
+        <hr />
+
+        <style>
+            .page-container {
+                display: grid;
+                grid-template-columns: 1fr 4fr;
+                /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr; */
+                gap: 50px;
+                justify-content: space-between;
+                /* margin: 50px 0; */
+            }
+            .container {
+                margin: 50px 0;
+            }
+            .left-content {
+                /* align-self: start;
+                grid-row-start: ; */
+                display: grid;
+                /* grid-template-rows: repeat(1fr, 10); */
+            }
+            .list-group {
+                /* grid-row-start: 5; */
+            }
+            .author-container {
+                padding-bottom: 50px;
+            }
+            .content {
+                text-align: justify;
+            }
+            .author-name,
+            .post-title {
+                display: flex;
+                /* justify-content: center; */
+                align-items: center;
+                font-size: 38px;
+                font-weight: bold;
+            }
+            .second-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 25px 0;
+                /* margin-left: 0; */
+            }
+            .btns {
+                /* position: ; */
+                /* right: 10px; */
+                /* display: flex; */
+                display: flex;
+                flex-direction: row;
+                gap: 10px;
+            }
+            .date {
+                /* font-weight: bold; */
+                color: rgb(147, 147, 147);
+            }
+            .image-container {
+                display: inline;
+                width: 300px;
+            }
+            img {
+                float: right;
+                width: 300px;
+                margin: 10px;
+            }
+        </style>
+        <div class="">
+            <div class="card-body">
+                <!-- <div class="heading">
+                <h2>{{post.title}}</h2>
+            </div> -->
+                <div class="second-container">
+                    <div class="date-container">
+                        <div class="date">Date : {{post.date_posted}}</div>
+                    </div>
+                    <div class="btns">
+                        <a
+                            class="btn btn-danger"
+                            href="/posts/delete/{{post.id}}"
+                            ><i class="fa-solid fa-trash"></i
+                        ></a>
+                        <a
+                            class="btn btn-primary"
+                            href="/posts/edit/{{post.id}}"
+                            ><i class="fa-solid fa-pen-to-square"></i
+                        ></a>
+                    </div>
+                </div>
+                <!-- <span class="image-container"> -->
+                <!-- <span class="image"> -->
+                <img
+                    src="{{url_for('static', filename='/images/posts/'+post.image)}}"
+                    alt=""
+                />
+                <!-- </span> -->
+                <!-- </span> -->
+                <div class="content-container">
+                    <div class="content">{{post.content}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
