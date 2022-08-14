@@ -1,40 +1,57 @@
-{% extends 'base.html'%}
-
-{% block head %}
+{% extends 'base.html'%} {% block head %}
 <title>Posts</title>
+{% endblock %} {% block body %}
+<br />
+<h2>Create a New Blog Post:</h2>
+<form action="/posts" method="POST" enctype="multipart/form-data">
+    <label for="title">Title:</label>
+    <input
+        class="form-control"
+        type="text"
+        placeholder="Title"
+        aria-label="Title"
+        name="title"
+        id="title"
+        required
+    />
+    <br />
+    <label for="author">Author:</label>
+    <input
+        class="form-control"
+        type="text"
+        placeholder="Author"
+        aria-label="Author"
+        name="author"
+        id="author"
+    />
+    <br />
+    <label for="content">Post:</label>
+    <textarea
+        class="form-control"
+        id="content"
+        rows="3"
+        placeholder="Post"
+        aria-label="Content"
+        name="content"
+        id="content"
+        required
+    ></textarea>
+    <br />
+    <label for="image">Upload an Image</label>
+    <input
+        class="form-control"
+        type="file"
+        accept="image/*"
+        name="image"
+        id="image"
+        required
+    />
+    <br />
+    <!-- <a href="/"></a> -->
+    <input type="submit" value="Add Post" />
+</form>
+<!-- <hr /> -->
 {% endblock %}
 
 
-{% block body %} 
-<br>
-    <h2>Create a New Blog Post: </h2>
-    <form action = '/posts', method = "POST">
-        <label for="title">Title:</label>
-        <input class="form-control" type="text" placeholder="Title" aria-label="Title" name = 'title' id = 'title'>
-        <br>
-        <label for="author">Author:</label>
-        <input class="form-control" type="text" placeholder="Author" aria-label="Author" name = 'author' id = 'author'>
-        <br>
-        <label for="content">Post:</label>
-        <textarea class="form-control" id="content" rows="3" placeholder = "Post" aria-label="Content" name = 'content' id = 'content'></textarea>
-        <br>
-        <input type = 'submit' value ='Posts'>
-    </form>
-    <hr>
-    {% for post in posts %}
-        <h2> {{ post.title }}</h2>
 
-        {% if post.author %}
-            <small> Written By {{post.author}}</small>
-        {% else %}
-            <h3>Written By Anonymous</h3>
-        {%endif%}
-        <br><br>
-        <p style = "white-space:pre-wrap"> {{ post.content }}</p>
-        <a class = "btn btn-danger" href = '/posts/delete/{{post.id}}'>Delete</a>
-        <a class = "btn btn-primary" href = '/posts/edit/{{post.id}}'>Edit</a>
-        <br>
-        <hr>
-    {% endfor%}
-
-{% endblock %}9
